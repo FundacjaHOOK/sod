@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand-primary: #0635d0;
+  --color-brand-onhover: #5306b8;
+  --color-brand-soft: #ffd6e0;
+
+  --color-page: #ffffff;
+  --color-elevated: #f4f4f4;
+  --color-placeholder: #ebebeb;
+  --color-sunken: #f8f8f8;
+
+  --color-subtle: #e5e5e5;
+
+  --color-main: #111111;
+  --color-navbar: oklch(20.5% 0 0);
+  --color-muted: #666666;
+
+  --radius-card: 1rem;
+}
+
+@layer base {
+  body {
+    @apply bg-page text-main font-sans;
+  }
+}

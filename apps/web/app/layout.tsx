@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import { sanityFetch, SanityLive } from "@/sanity/live";
 import { Toaster } from "sonner";
 import { SanityPreview } from "@/sanity/preview/SanityPreview";
 import { mapMetadata } from "@/sanity/metadata/mapMetadata";
 import { q } from "@/sanity/groqd";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { routing } from "@/i18n/routing";
-import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { locales } from "@/i18n/locales";
+
+import UtilityHeader from "@/app/_components/Navigation/UtilityHeader";
+import Navbar from "@/app/_components/Navigation/Navbar";
+import NewsletterButton from "@/app/_components/Buttons/NewsletterButton";
+import UpArrowButton from "@/app/_components/Buttons/UpArrowButton";
+import Footer from "@/app/_components/Footer";
 
 /** This is the base metadata for the entire project, it will cascade down to subpages
  * @see https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function */
@@ -32,12 +32,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-/** Since we are using a dynamic route segment for the [locale] param, we need to
- *  instruct Next.js what params exist so that it may pre-generate pages */
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
-
 /** Setup font optimization
  * @see https://nextjs.org/docs/app/getting-started/fonts */
 
@@ -53,33 +47,20 @@ const geistMono = Geist_Mono({
 
 export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }>) {
-  const { locale } = await params;
-
-  // Validating locale at root layout ensures it is valid everywhere
-  if (!hasLocale(routing.locales, locale)) notFound();
-
-  setRequestLocale(locale); // Enables static rendering, this should be done in every page/layout
-
   return (
-    <html lang="en">
+    <html lang="pl">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <NextIntlClientProvider>
-          <div className="flex justify-center gap-3 uppercase pt-5">
-            {locales.map((l) => (
-              <Link key={l} href="/" locale={l}>
-                {l}
-              </Link>
-            ))}
-          </div>
-          {children}
-          <Toaster />
-          <SanityPreview />
-        </NextIntlClientProvider>
+        <UtilityHeader />
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Toaster />
+        <SanityPreview />
+        <NewsletterButton />
+        <UpArrowButton />
+        <Footer Address="ul. Przykładowa 123, 00-000 Miasto" />
       </body>
       <SanityLive />
     </html>

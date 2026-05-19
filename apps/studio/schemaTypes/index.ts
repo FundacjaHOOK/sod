@@ -8,6 +8,14 @@ import img from "./img";
 import richText from "./richText";
 import leadSection from "./sections/leadSection";
 import postsSection from "./sections/postsSection";
+import heroSection from "./sections/heroSection";
+import cardsWithBackgroundSection from "./sections/cardsLandingSection";
+import cardsWithRedirectSection from "./sections/cardsWithRedirect";
+import supportSection from "./sections/supportSection";
+import cooperationSection from "./sections/cooperationSection";
+import redirectButton from "./objects/redirectButton";
+import cardLandingPage from "./objects/cardLandingPage";
+import cardWithRedirect from "./objects/cardWithRedirect";
 
 export const schemaTypes = [
   post,
@@ -20,4 +28,12 @@ export const schemaTypes = [
   img,
   leadSection,
   postsSection,
+  heroSection,
+  cardsWithBackgroundSection,
+  cardsWithRedirectSection,
+  supportSection,
+  cooperationSection,
+  redirectButton,
+  cardLandingPage,
+  cardWithRedirect,
 ];

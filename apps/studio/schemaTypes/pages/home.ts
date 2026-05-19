@@ -1,5 +1,4 @@
 import { defineField, defineType, defineArrayMember } from "sanity";
-import { languageField } from "../../plugins/intl";
 import { pageGroups } from "../../utils/groups";
 import { seoField, documentNameField } from "../../utils/fields";
 
@@ -9,7 +8,6 @@ export default defineType({
   type: "document",
   groups: pageGroups,
   fields: [
-    languageField,
     seoField,
     documentNameField,
     defineField({
@@ -23,15 +21,43 @@ export default defineType({
       of: [
         defineArrayMember({
           name: "sectionImage",
+          title: "Obraz",
           type: "img",
         }),
         defineArrayMember({
+          name: "sectionHero",
+          title: "Sekcja Hero",
+          type: "heroSection",
+        }),
+        defineArrayMember({
           name: "sectionLead",
+          title: "Nagłówek",
           type: "leadSection",
         }),
         defineArrayMember({
           name: "sectionPost",
+          title: "Posty",
           type: "postsSection",
+        }),
+        defineArrayMember({
+          name: "sectionCardsWithBackground",
+          title: "Karty z backgroundem",
+          type: "cardswithbackground",
+        }),
+        defineArrayMember({
+          name: "sectionCardsWithRedirect",
+          title: "Karty z przekierowaniem",
+          type: "cardswithredirect",
+        }),
+        defineArrayMember({
+          name: "sectionSupport",
+          title: "Wsparcie",
+          type: "supportSection",
+        }),
+        defineArrayMember({
+          name: "sectionCooperation",
+          title: "Współpraca",
+          type: "cooperationSection",
         }),
       ],
     }),
