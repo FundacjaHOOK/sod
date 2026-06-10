@@ -1,5 +1,6 @@
 import category from "./category";
 import post from "./pages/post";
+import material from "./pages/material";
 import author from "./author";
 import home from "./pages/home";
 import settings from "./settings";
@@ -20,6 +21,7 @@ import workshop from "./objects/workshop";
 
 export const schemaTypes = [
   post,
+  material,
   author,
   category,
   settings,
