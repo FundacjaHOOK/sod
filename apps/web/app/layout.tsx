@@ -49,7 +49,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="pl" className={cn("h-full", "antialiased", "font-sans", poppins.variable)}>
-      <body>
+      <body className="flex flex-col min-h-full">
         <UtilityHeader />
         <Navbar />
         <main className="flex-1">{children}</main>
