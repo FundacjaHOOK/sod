@@ -1,19 +1,33 @@
 import Image from "next/image";
 import NewsletterForm from "./NewsletterForm";
+import ROUTES from "@/constants/routes";
 
-export default function Footer({ Address }: { Address: string }) {
+interface FooterProps {
+  address: string;
+  logo?: string | null;
+  socialLinks?: {
+    facebook?: string | null;
+    instagram?: string | null;
+    linkedin?: string | null;
+  } | null;
+}
+
+export default async function Footer({ address, logo, socialLinks }: FooterProps) {
   const mainLinks = [
-    ["Warsztaty", "/warsztaty"],
-    ["Materiały", "/materials"],
-    ["Wesprzyj nas", "/wesprzyj-nas"],
-    ["O nas", "/o-nas"],
-    ["Kontakt", "/kontakt"],
+    ["Warsztaty", ROUTES.WORKSHOPS],
+    ["Materiały", ROUTES.MATERIALS],
+    ["Wesprzyj nas", ROUTES.SUPPORT_US],
+    ["O nas", ROUTES.ABOUT_US],
+    ["Kontakt", ROUTES.CONTACT],
   ];
 
   const legalLinks = [
-    ["Klauzula informacyjna", "#"],
-    ["Polityka prywatności (RODO)", "#"],
+    ["Klauzula informacyjna", ROUTES.INFORMATION_CLAUSE],
+    ["Polityka prywatności (RODO)", ROUTES.PRIVACY_POLICY],
   ];
+
+  const logoUrl = logo;
+  const socialLinksData = socialLinks;
 
   return (
     <footer className="bg-sunken px-4 py-10 border-subtle border-t text-main">
@@ -21,8 +35,19 @@ export default function Footer({ Address }: { Address: string }) {
         {/*Left part*/}
         <div className="gap-8 grid grid-cols-1 md:grid-cols-4 text-sm">
           <div>
-            <Image src="/logo.png" alt="Fundacja HOOK" width={40} height={90} />
-            <p className="mt-2">{Address}</p>
+            {/*Logo*/}
+            <div className="relative w-32 h-12">
+              {logoUrl && (
+                <Image
+                  src={logoUrl}
+                  alt="Fundacja HOOK"
+                  fill
+                  priority
+                  className="object-contain object-left"
+                />
+              )}
+            </div>
+            <p className="mt-2">{address}</p>
           </div>
           {/*Main links*/}
           <div>
@@ -52,7 +77,7 @@ export default function Footer({ Address }: { Address: string }) {
           </div>
           {/*Newsletter*/}
           <div>
-            <NewsletterForm />
+            <NewsletterForm SOCIAL_LINKS={socialLinksData} />
           </div>
         </div>
       </div>
